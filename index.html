@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Математика · 1–11 класс — Тест с темами и достижениями</title>
+<style>
+  :root{
+    --hl1:#eceef0; --hl2:#aeb3ba;
+    --bg1:#d9dcdf; --bg2:#c3c7cc;
+    --card:#f7f8f9; --panel:#eef0f2; --white:#ffffff;
+    --ink:#3a3f46; --ink-soft:#6b7280; --line:#cfd3d8; --line-strong:#9aa1aa;
+    --ok:#2e9e5b; --ok-bg:#e2f4e9; --ok-text:#1c6b3d;
+    --bad:#d64545; --bad-bg:#fbe7e7; --bad-text:#a12c2c;
+    --accent:#5b6470;
+    --shadow:rgba(60,64,70,.18);
+    --dot:rgba(255,255,255,.4);
+  }
+  body.dark{
+    --hl1:#4a4f57; --hl2:#16181b;
+    --bg1:#383c42; --bg2:#25282d;
+    --card:#3b4046; --panel:#31353b; --white:#2f3339;
+    --ink:#e8eaed; --ink-soft:#9aa1aa; --line:#565d66; --line-strong:#7d858f;
+    --ok:#4caf7d; --ok-bg:#22392c; --ok-text:#9fd8b5;
+    --bad:#d06b6b; --bad-bg:#3f2729; --bad-text:#f0a8a8;
+    --accent:#8b93a0;
+    --shadow:rgba(0,0,0,.4);
+    --dot:rgba(255,255,255,.06);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html,body{ min-height:100%; }
+  body{
+    font-family:"Comic Sans MS","Comic Sans","Chalkboard SE","Marker Felt",cursive;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 18% 8%, var(--hl1) 0, transparent 45%),
+      radial-gradient(circle at 85% 92%, var(--hl2) 0, transparent 50%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    background-attachment:fixed;
+    display:flex;
+    justify-content:center;
+    padding:30px 16px 70px;
+    transition:background .4s ease, color .4s ease;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:radial-gradient(var(--dot) 1.4px, transparent 1.4px);
+    background-size:26px 26px;
+    pointer-events:none;
+  }
+  .wrap{ width:100%; max-width:760px; position:relative; }
+
+  #soundToggleBtn{
+    position:fixed;
+    top:calc(12px + env(safe-area-inset-top, 0px));
+    right:14px;
+    z-index:60;
+    width:46px; height:46px;
+    border-radius:50%;
+    border:2px solid var(--line);
+    background:linear-gradient(180deg,#eef0f2,#dfe2e6);
+    color:#4b5158;
+    font-size:1.25rem;
+    line-height:1;
+    cursor:pointer;
+    touch-action:manipulation;
+    box-shadow:0 4px 0 #b6bcc4, 0 8px 14px rgba(50,55,60,.2);
+    transition:transform .15s ease, filter .15s ease;
+    display:flex; align-items:center; justify-content:center;
+  }
+  #soundToggleBtn:hover{ filter:brightness(1.06); transform:translateY(-2px); }
+  #soundToggleBtn:active{ transform:translateY(2px); box-shadow:0 1px 0 #b6bcc4, 0 4px 8px rgba(50,55,60,.2); }
+  body.dark #soundToggleBtn{
+    background:linear-gradient(180deg,#5a616b,#494f58);
+    box-shadow:0 4px 0 #2b2f35, 0 8px 14px rgba(0,0,0,.35);
+  }
+  body.dark #soundToggleBtn:active{ box-shadow:0 1px 0 #2b2f35, 0 4px 8px rgba(0,0,0,.35); }
+
+  .card{
+    background:var(--card);
+    border:2px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 14px 34px var(--shadow);
+    padding:28px 30px;
+    animation:fadeUp .5s ease both;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:none;} }
+  @keyframes slideIn{ from{ opacity:0; transform:translateX(26px);} to{ opacity:1; transform:none;} }
+  @keyframes shake{
+    0%,100%{ transform:translateX(0); }
+    20%{ transform:translateX(-7px); } 40%{ transform:translateX(7px); }
+    60%{ transform:translateX(-5px); } 80%{ transform:translateX(5px); }
+  }
+  @keyframes pop{ 0%{ transform:scale(1);} 45%{ transform:scale(1.06);} 100%{ transform:scale(1);} }
+
+  .banner{
+    width:100%;
+    border-radius:16px;
+    border:2px solid var(--line);
+    display:block;
+    object-fit:cover;
+    max-height:190px;
+    margin-bottom:18px;
+  }
+  h1{ font-size:1.7rem; text-align:center; letter-spacing:.5px; color:var(--ink); }
+  .subtitle{ text-align:center; color:var(--ink-soft); margin:8px 0 20px; font-size:.98rem; }
+  .rules{
+    background:var(--panel);
+    border:2px dashed var(--line);
+    border-radius:14px;
+    padding:14px 18px;
+    margin-bottom:22px;
+    font-size:.95rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+    transition:background .4s ease;
+  }
+  .rules b{ color:var(--ink); }
+
+  .btn{
+    font-family:inherit;
+    font-size:1.05rem;
+    font-weight:bold;
+    color:#fff;
+    background:linear-gradient(180deg,#6d7683,#525a66);
+    border:none;
+    border-radius:14px;
+    padding:13px 30px;
+    cursor:pointer;
+    touch-action:manipulation;
+    box-shadow:0 5px 0 #3c434d, 0 10px 18px rgba(50,55,60,.25);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    display:inline-block;
+  }
+  .btn:hover{ filter:brightness(1.08); transform:translateY(-2px); box-shadow:0 7px 0 #3c434d, 0 13px 20px rgba(50,55,60,.28); }
+  .btn:active{ transform:translateY(3px); box-shadow:0 2px 0 #3c434d, 0 6px 12px rgba(50,55,60,.25); }
+  .btn.secondary{
+    background:linear-gradient(180deg,#eef0f2,#dfe2e6);
+    color:#4b5158;
+    box-shadow:0 5px 0 #b6bcc4, 0 10px 18px rgba(50,55,60,.15);
+  }
+  .btn.secondary:hover{ box-shadow:0 7px 0 #b6bcc4, 0 13px 20px rgba(50,55,60,.18); }
+  .btn.secondary:active{ box-shadow:0 2px 0 #b6bcc4, 0 6px 12px rgba(50,55,60,.15); }
+  body.dark .btn.secondary{
+    background:linear-gradient(180deg,#5a616b,#494f58);
+    color:#dde0e4;
+    box-shadow:0 5px 0 #2b2f35, 0 10px 18px rgba(0,0,0,.3);
+  }
+  body.dark .btn.secondary:hover{ box-shadow:0 7px 0 #2b2f35, 0 13px 20px rgba(0,0,0,.33); }
+  body.dark .btn.secondary:active{ box-shadow:0 2px 0 #2b2f35, 0 6px 12px rgba(0,0,0,.3); }
+  .center{ text-align:center; }
+  .btn-row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:24px; }
+
+  /* ---- карточки выбора (тема / сложность) ---- */
+  .pick-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-bottom:10px; }
+  .pick-grid.two{ grid-template-columns:1fr 1fr; }
+  @media (max-width:640px){ .pick-grid, .pick-grid.two{ grid-template-columns:1fr; } }
+  .pick-card{
+    font-family:inherit;
+    background:var(--white);
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:18px 14px;
+    cursor:pointer;
+    text-align:center;
+    color:var(--ink);
+    touch-action:manipulation;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  }
+  .pick-card:hover{ transform:translateY(-4px); box-shadow:0 10px 20px var(--shadow); }
+  .pick-card .lv-emoji{ font-size:2.2rem; display:block; margin-bottom:8px; }
+  .pick-card .lv-name{ font-weight:bold; font-size:1.1rem; display:block; margin-bottom:6px; }
+  .pick-card .lv-desc{ font-size:.83rem; color:var(--ink-soft); line-height:1.45; display:block; }
+  .pick-card.easy:hover{ border-color:#8fbd9f; background:#f2faf5; }
+  .pick-card.medium:hover{ border-color:#c9b27a; background:#faf6ec; }
+  .pick-card.hard:hover{ border-color:#c98f8f; background:#fbf2f2; }
+  .pick-card.light-theme:hover{ border-color:#d9c06a; background:#fdf9ec; }
+  .pick-card.dark-theme:hover{ border-color:#7d858f; background:#e7e9ec; }
+  body.dark .pick-card.easy:hover{ border-color:#5f9372; background:#2a3a30; }
+  body.dark .pick-card.medium:hover{ border-color:#a58e57; background:#3a352a; }
+  body.dark .pick-card.hard:hover{ border-color:#a57070; background:#3c2d2d; }
+  body.dark .pick-card.light-theme:hover{ border-color:#a8954f; background:#3a352a; }
+  body.dark .pick-card.dark-theme:hover{ border-color:#9aa1aa; background:#24272c; }
+
+  /* ---- НОВОЕ: сетка классов 1–11 ---- */
+  .grade-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(92px, 1fr));
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .grade-card{
+    font-family:inherit;
+    background:var(--white);
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:14px 6px 12px;
+    cursor:pointer;
+    text-align:center;
+    color:var(--ink);
+    touch-action:manipulation;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  }
+  .grade-card:hover{ transform:translateY(-3px); border-color:var(--line-strong); box-shadow:0 8px 16px var(--shadow); }
+  .grade-card.selected{ border-color:var(--accent); background:var(--panel); box-shadow:0 0 0 3px rgba(91,100,112,.25); }
+  .grade-card .g-num{ display:block; font-size:1.6rem; font-weight:bold; }
+  .grade-card .g-label{ display:block; font-size:.72rem; color:var(--ink-soft); margin-top:2px; }
+
+  /* ---- экран теста ---- */
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    margin-bottom:12px;
+    font-size:.85rem;
+    color:var(--ink-soft);
+    flex-wrap:wrap;
+  }
+  .score-badge, .diff-badge, .streak-badge{
+    border:2px solid var(--line);
+    border-radius:999px;
+    padding:5px 12px;
+    font-weight:bold;
+  }
+  .score-badge, .streak-badge{ background:var(--panel); color:var(--ink); }
+  .streak-badge{ display:none; }
+  .streak-badge.on{ display:inline-block; animation:pop .35s ease; }
+  .diff-badge.easy{ background:#dfeee4; border-color:#8fbd9f; color:#3c6b4c; }
+  .diff-badge.medium{ background:#f0e9d8; border-color:#c9b27a; color:#7a6430; }
+  .diff-badge.hard{ background:#f2dcdc; border-color:#c98f8f; color:#8a3c3c; }
+  body.dark .diff-badge.easy{ background:#24382c; border-color:#4f7a5e; color:#a8d8b8; }
+  body.dark .diff-badge.medium{ background:#3a352a; border-color:#8f7a4a; color:#e0cf9d; }
+  body.dark .diff-badge.hard{ background:#3c2d2d; border-color:#9c6a6a; color:#eab5b5; }
+
+  .progress{
+    height:12px;
+    background:var(--panel);
+    border:2px solid var(--line);
+    border-radius:999px;
+    overflow:hidden;
+    margin-bottom:22px;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#8a929d,#5b6470);
+    border-radius:999px;
+    transition:width .5s ease;
+  }
+
+  .q-slide{ animation:slideIn .4s ease both; }
+  .q-text{
+    font-size:1.25rem;
+    font-weight:bold;
+    background:var(--panel);
+    border-left:6px solid var(--accent);
+    border-radius:10px;
+    padding:14px 18px;
+    margin-bottom:20px;
+    line-height:1.5;
+    color:var(--ink);
+    transition:background .4s ease;
+  }
+
+  .answers{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:560px){ .answers{ grid-template-columns:1fr; } }
+  .answer{
+    font-family:inherit;
+    font-size:1.05rem;
+    text-align:left;
+    color:var(--ink);
+    background:var(--white);
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:13px 16px;
+    cursor:pointer;
+    touch-action:manipulation;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+    display:flex; align-items:center; gap:10px;
+  }
+  .answer .letter{
+    flex:0 0 30px; height:30px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel);
+    border:2px solid var(--line);
+    border-radius:50%;
+    font-weight:bold;
+    font-size:.9rem;
+    color:var(--ink-soft);
+  }
+  .answer:hover:not(:disabled){
+    transform:translateY(-2px);
+    border-color:var(--line-strong);
+    box-shadow:0 6px 14px var(--shadow);
+  }
+  .answer:disabled{ cursor:default; opacity:.85; }
+  .answer.correct{
+    background:var(--ok-bg);
+    border-color:var(--ok);
+    color:var(--ok-text);
+    opacity:1;
+    animation:pop .35s ease;
+  }
+  .answer.correct .letter{ background:var(--ok-bg); border-color:var(--ok); color:var(--ok-text); }
+  .answer.wrong{
+    background:var(--bad-bg);
+    border-color:var(--bad);
+    color:var(--bad-text);
+    opacity:1;
+    animation:shake .4s ease;
+  }
+  .answer.wrong .letter{ background:var(--bad-bg); border-color:var(--bad); color:var(--bad-text); }
+
+  .feedback{
+    margin-top:20px;
+    border-radius:14px;
+    padding:16px 18px;
+    font-size:.98rem;
+    line-height:1.6;
+    display:none;
+    animation:fadeUp .4s ease both;
+  }
+  .feedback.show{ display:block; }
+  .feedback.good{ background:var(--ok-bg); border:2px solid var(--ok); color:var(--ok-text); }
+  .feedback.bad{ background:var(--bad-bg); border:2px solid var(--bad); color:var(--bad-text); }
+  .feedback .fb-title{ font-weight:bold; font-size:1.08rem; margin-bottom:6px; }
+
+  .next-row{ margin-top:22px; text-align:right; display:none; }
+  .next-row.show{ display:block; animation:fadeUp .35s ease both; }
+
+  /* ---- результаты ---- */
+  .result-circle{
+    width:130px; height:130px;
+    margin:6px auto 16px;
+    border-radius:50%;
+    background:var(--white);
+    border:6px solid var(--accent);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    box-shadow:0 10px 22px var(--shadow);
+    animation:pop .5s ease;
+  }
+  .result-circle .big{ font-size:2rem; font-weight:bold; color:var(--ink); }
+  .result-circle .small{ font-size:.8rem; color:var(--ink-soft); }
+  .result-msg{ text-align:center; font-size:1.1rem; margin-bottom:10px; line-height:1.6; }
+  .result-level{ text-align:center; margin-bottom:22px; }
+  .result-level span{ margin:0 4px; display:inline-block; }
+
+  .section-title{ font-size:1.15rem; margin-bottom:14px; color:var(--ink); }
+  .review-item, .ach-item{
+    background:var(--panel);
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:12px;
+    font-size:.93rem;
+    line-height:1.6;
+    color:var(--ink);
+  }
+  .review-item .rq{ font-weight:bold; margin-bottom:6px; }
+  .review-item .explain{ margin-top:6px; color:var(--ink-soft); }
+  .tag{ display:inline-block; border-radius:8px; padding:2px 8px; font-weight:bold; margin-right:6px; }
+  .tag.ok{ background:var(--ok-bg); color:var(--ok-text); border:1px solid var(--ok); }
+  .tag.bad{ background:var(--bad-bg); color:var(--bad-text); border:1px solid var(--bad); }
+
+  /* ---- достижения ---- */
+  .ach-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
+    gap:12px;
+  }
+  .ach-item{
+    background:var(--white);
+    text-align:center;
+    margin-bottom:0;
+    position:relative;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .ach-item:hover{ transform:translateY(-3px); box-shadow:0 8px 16px var(--shadow); }
+  .ach-item .a-emoji{ font-size:1.9rem; display:block; margin-bottom:6px; }
+  .ach-item .a-name{ font-weight:bold; font-size:.92rem; display:block; margin-bottom:4px; }
+  .ach-item .a-desc{ font-size:.78rem; color:var(--ink-soft); line-height:1.4; display:block; }
+  .ach-item.locked{ opacity:.6; border-style:dashed; }
+  .ach-item.locked .a-emoji{ filter:grayscale(1); opacity:.65; }
+  .ach-item.locked::after{ content:"🔒"; position:absolute; top:8px; right:10px; font-size:.85rem; }
+  .ach-item.new{ border-color:var(--ok); background:var(--ok-bg); animation:pop .5s ease; }
+  .ach-item.new::before{
+    content:"НОВОЕ!";
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+    background:var(--ok); color:#fff;
+    font-size:.62rem; font-weight:bold;
+    border-radius:8px; padding:2px 8px;
+  }
+  .ach-progress{ text-align:center; color:var(--ink-soft); margin-bottom:18px; font-size:.95rem; }
+  .mb20{ margin-bottom:20px; }
+  footer{ text-align:center; margin-top:26px; color:var(--ink-soft); font-size:.85rem; }
+
+  /* ---- отступы и размеры для телефона ---- */
+  @media (max-width:600px){
+    body{ padding:12px 10px calc(18px + env(safe-area-inset-bottom, 0px)); }
+    .card{ padding:18px 14px; border-radius:18px; }
+    #soundToggleBtn{ width:42px; height:42px; font-size:1.1rem; top:calc(8px + env(safe-area-inset-top, 0px)); right:8px; }
+    .banner{ max-height:130px; margin-bottom:12px; }
+    h1{ font-size:1.3rem; }
+    .subtitle{ font-size:.88rem; margin:6px 0 14px; }
+    .rules{ padding:11px 13px; font-size:.86rem; margin-bottom:16px; line-height:1.55; }
+    .pick-card{ padding:14px 12px; }
+    .pick-card .lv-emoji{ font-size:1.9rem; margin-bottom:6px; }
+    .pick-card .lv-name{ font-size:1rem; }
+    .pick-card .lv-desc{ font-size:.8rem; }
+    .grade-grid{ grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; }
+    .grade-card{ padding:10px 4px 9px; }
+    .grade-card .g-num{ font-size:1.3rem; }
+    .grade-card .g-label{ font-size:.62rem; }
+    .btn{ padding:12px 18px; font-size:.98rem; width:100%; }
+    .btn-row{ gap:9px; }
+    .btn-row .btn{ width:auto; flex:1 1 150px; }
+    .topbar{ font-size:.72rem; gap:5px; }
+    .score-badge, .diff-badge, .streak-badge{ padding:3px 8px; }
+    .progress{ margin-bottom:16px; }
+    .q-text{ font-size:1.02rem; padding:11px 13px; margin-bottom:14px; border-left-width:5px; }
+    .answers{ gap:9px; }
+    .answer{ padding:11px 12px; font-size:.95rem; gap:8px; border-radius:12px; }
+    .answer .letter{ flex:0 0 26px; height:26px; font-size:.8rem; }
+    .feedback{ padding:12px 13px; font-size:.88rem; margin-top:14px; }
+    .feedback .fb-title{ font-size:.98rem; }
+    .next-row{ margin-top:16px; }
+    .result-circle{ width:110px; height:110px; }
+    .result-circle .big{ font-size:1.6rem; }
+    .result-msg{ font-size:1rem; }
+    .section-title{ font-size:1.02rem; }
+    .ach-grid{ grid-template-columns:repeat(2, 1fr); gap:8px; }
+    .ach-item{ padding:10px 7px; }
+    .ach-item .a-emoji{ font-size:1.5rem; margin-bottom:4px; }
+    .ach-item .a-name{ font-size:.8rem; }
+    .ach-item .a-desc{ font-size:.68rem; }
+    .review-item{ padding:11px 12px; font-size:.84rem; }
+    footer{ font-size:.76rem; margin-top:18px; }
+  }
+  @media (max-width:350px){
+    .ach-grid{ grid-template-columns:1fr; }
+    .btn-row .btn{ flex:1 1 100%; }
+  }
+</style>
+</head>
+<body>
+
+<button id="soundToggleBtn" title="Выключить звук">🔊</button>
+
+<div class="wrap">
+
+  <!-- Стартовый экран -->
+  <section class="card" id="startScreen">
+    <img class="banner" src="https://image.qwenlm.ai/public_source/183b9ed7-13a0-4a57-be32-e4491bbf99df/1a1adf7c6-d0b2-45b2-82f6-ea77aeda897e.png" alt="Математические символы и фигуры">
+    <h1>🧮 Математика · 1–11 класс</h1>
+    <p class="subtitle">Тест с темами, классами, сложностью и достижениями</p>
+    <div class="rules">
+      <b>Как проходит тест:</b><br>
+      📌 Сначала выбери тему: ☀️ светлую или 🌙 тёмную.<br>
+      📌 Потом выбери свой класс: 🏫 с 1 по 11.<br>
+      📌 Затем выбери сложность: 🐢 лёгкую, 🐰 среднюю или 🚀 сложную.<br>
+      📌 Вопросы каждый раз <b>перемешиваются</b> 🔀<br>
+      📌 После ответа сразу появляется <b>объяснение</b>, почему ответ правильный или неправильный.<br>
+      📌 Собирай <b>достижения</b> 🏅 — они сохраняются и не пропадают!<br>
+      🔊 При наведении на кнопки звучат приятные тихие звуки. Выключить их можно кнопкой 🔊 в правом верхнем углу.
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="toThemeBtn">Начать тест ✏️</button>
+      <button class="btn secondary" id="achBtn">🏅 Достижения</button>
+    </div>
+  </section>
+
+  <!-- Экран выбора темы -->
+  <section class="card" id="themeScreen" style="display:none;">
+    <h1>🎨 Выбери тему</h1>
+    <p class="subtitle">Как тебе удобнее решать тест?</p>
+    <div class="pick-grid two">
+      <button class="pick-card light-theme" data-theme="light">
+        <span class="lv-emoji">☀️</span>
+        <span class="lv-name">Светлая</span>
+        <span class="lv-desc">Светлый серый фон — как страничка в тетрадке.</span>
+      </button>
+      <button class="pick-card dark-theme" data-theme="dark">
+        <span class="lv-emoji">🌙</span>
+        <span class="lv-name">Тёмная</span>
+        <span class="lv-desc">Тёмный серый фон — глазам легче, ничего не отвлекает.</span>
+      </button>
+    </div>
+    <div class="center" style="margin-top:16px;">
+      <button class="btn secondary" id="themeBackBtn">← Назад</button>
+    </div>
+  </section>
+
+  <!-- НОВОЕ: экран выбора класса -->
+  <section class="card" id="gradeScreen" style="display:none;">
+    <h1>🏫 Выбери класс</h1>
+    <p class="subtitle">Вопросы подберутся под выбранный класс!</p>
+    <div class="grade-grid" id="gradeGrid"></div>
+    <div class="center" style="margin-top:16px;">
+      <button class="btn secondary" id="gradeBackBtn">← Назад</button>
+    </div>
+  </section>
+
+  <!-- Экран выбора сложности -->
+  <section class="card" id="levelScreen" style="display:none;">
+    <h1>🎯 Выбери сложность</h1>
+    <p class="subtitle" id="levelSubtitle">Начни с лёгкого уровня или сразу брось себе вызов!</p>
+    <div class="pick-grid">
+      <button class="pick-card easy" data-level="easy">
+        <span class="lv-emoji">🐢</span>
+        <span class="lv-name">Лёгкая</span>
+        <span class="lv-desc">Простые задания для разминки — вспомни основы.</span>
+      </button>
+      <button class="pick-card medium" data-level="medium">
+        <span class="lv-emoji">🐰</span>
+        <span class="lv-name">Средняя</span>
+        <span class="lv-desc">Задания посложнее — нужно подумать и посчитать.</span>
+      </button>
+      <button class="pick-card hard" data-level="hard">
+        <span class="lv-emoji">🚀</span>
+        <span class="lv-name">Сложная</span>
+        <span class="lv-desc">Самые трудные задания для настоящих знатоков.</span>
+      </button>
+    </div>
+    <div class="center" style="margin-top:16px;">
+      <button class="btn secondary" id="backFromLevelBtn">← Назад</button>
+    </div>
+  </section>
+
+  <!-- Экран достижений -->
+  <section class="card" id="achScreen" style="display:none;">
+    <h1>🏅 Достижения</h1>
+    <p class="ach-progress" id="achScreenCount"></p>
+    <div class="ach-grid mb20" id="achScreenGrid"></div>
+    <div class="center">
+      <button class="btn secondary" id="achBackBtn">← Назад</button>
+    </div>
+  </section>
+
+  <!-- Экран теста -->
+  <section class="card" id="quizScreen" style="display:none;">
+    <div class="topbar">
+      <span id="qCounter">Вопрос 1 из 10</span>
+      <span class="score-badge" id="gradeBadge">🏫 3 класс</span>
+      <span class="diff-badge" id="diffBadge">Уровень</span>
+      <span class="streak-badge" id="streakBadge">🔥 Серия: 0</span>
+      <span class="score-badge" id="scoreBadge">⭐ Баллы: 0</span>
+    </div>
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="qSlide">
+      <div class="q-text" id="qText"></div>
+      <div class="answers" id="answersBox"></div>
+    </div>
+    <div class="feedback" id="feedback">
+      <div class="fb-title" id="fbTitle"></div>
+      <div id="fbText"></div>
+    </div>
+    <div class="next-row" id="nextRow">
+      <button class="btn" id="nextBtn">Следующий вопрос →</button>
+    </div>
+  </section>
+
+  <!-- Экран результатов -->
+  <section class="card" id="resultScreen" style="display:none;">
+    <h1>🏁 Тест завершён!</h1>
+    <p class="subtitle" id="resultSubtitle"></p>
+    <div class="result-circle">
+      <span class="big" id="resultScore">0/10</span>
+      <span class="small" id="resultPercent">0%</span>
+    </div>
+    <p class="result-msg" id="resultMsg"></p>
+    <p class="result-level" id="resultLevel"></p>
+
+    <h2 class="section-title" id="achResultTitle">🏅 Достижения</h2>
+    <div class="ach-grid mb20" id="achResultGrid"></div>
+
+    <h2 class="section-title">📖 Разбор ответов</h2>
+    <div id="reviewList"></div>
+
+    <div class="btn-row">
+      <button class="btn" id="restartBtn">Пройти ещё раз 🔄</button>
+      <button class="btn secondary" id="changeLevelBtn">Выбрать сложность 🎯</button>
+    </div>
+  </section>
+
+  <footer>Тренажёр по математике для 1–11 класса · учись с удовольствием!</footer>
+</div>
+
+<script>
+  /* ---------- данные ---------- */
+  const LEVELS = {
+    easy:   { name: "Лёгкая",   emoji: "🐢" },
+    medium: { name: "Средняя",  emoji: "🐰" },
+    hard:   { name: "Сложная",  emoji: "🚀" }
+  };
+
+  /* Вопросы для 3 класса — готовые, по уровням */
+  const QUESTIONS_BY_LEVEL = {
+    easy: [
+      { q: "Сколько будет 5 + 7?", a: [
+        { t: "11", e: "Не хватает одной единицы. Посчитай: 5 + 7 = 12." },
+        { t: "12", ok: true, e: "Молодец! 5 + 7 = 12." },
+        { t: "13", e: "Лишняя единичка! Проверь: 5 + 7 = 12." },
+        { t: "14", e: "14 получилось бы, если бы было 7 + 7. А у нас 5 + 7 = 12." } ] },
+      { q: "Сколько будет 9 − 4?", a: [
+        { t: "4", e: "Проверь сложением: 4 + 4 = 8, а не 9. Значит, 9 − 4 = 5." },
+        { t: "5", ok: true, e: "Верно! 9 − 4 = 5. Проверка: 5 + 4 = 9." },
+        { t: "6", e: "Проверь сложением: 6 + 4 = 10, а не 9. Ответ 5." },
+        { t: "13", e: "Ты сложил 9 и 4 вместо вычитания. Правильно: 9 − 4 = 5." } ] },
+      { q: "Сколько будет 3 × 4?", a: [
+        { t: "7", e: "7 получится, если сложить 3 + 4. А умножение — это много одинаковых слагаемых: 3 + 3 + 3 + 3 = 12." },
+        { t: "12", ok: true, e: "Верно! 3 × 4 = 12." },
+        { t: "9", e: "9 — это 3 × 3. А у нас 3 × 4 = 12." },
+        { t: "16", e: "16 — это 4 × 4. А у нас 3 × 4 = 12." } ] },
+      { q: "Сколько будет 10 ÷ 2?", a: [
+        { t: "2", e: "Проверь: 2 × 2 = 4, а не 10. Правильно: 10 ÷ 2 = 5." },
+        { t: "5", ok: true, e: "Верно! 5 × 2 = 10, значит 10 ÷ 2 = 5." },
+        { t: "8", e: "8 получится, если вычесть: 10 − 2 = 8. А мы делим: 10 ÷ 2 = 5." },
+        { t: "12", e: "Ты сложил 10 + 2. Нужно делить: 10 ÷ 2 = 5." } ] },
+      { q: "Сколько будет 20 + 30?", a: [
+        { t: "60", e: "Лишний десяток! 2 десятка + 3 десятка = 5 десятков, то есть 50." },
+        { t: "50", ok: true, e: "Верно! 20 + 30 = 50." },
+        { t: "23", e: "Ты просто записал цифры рядом. Нужно сложить десятки: 20 + 30 = 50." },
+        { t: "40", e: "Не хватает одного десятка: 20 + 30 = 50." } ] },
+      { q: "Сколько будет 15 − 6?", a: [
+        { t: "8", e: "Проверь: 8 + 6 = 14, а не 15. Значит, 15 − 6 = 9." },
+        { t: "9", ok: true, e: "Верно! 15 − 6 = 9. Проверка: 9 + 6 = 15." },
+        { t: "11", e: "Проверь: 11 + 6 = 17, а не 15. Ответ: 9." },
+        { t: "21", e: "Откуда взялся второй десяток? Правильно: 15 − 6 = 9." } ] },
+      { q: "У Маши 3 яблока, а у Пети на 2 яблока больше. Сколько яблок у Пети?", a: [
+        { t: "1", e: "«На 2 больше» — значит нужно прибавить, а не отнять: 3 + 2 = 5." },
+        { t: "5", ok: true, e: "Верно! На 2 больше — значит 3 + 2 = 5 яблок." },
+        { t: "6", e: "Одно яблоко лишнее! 3 + 2 = 5." },
+        { t: "2", e: "Ты назвал само число 2, а нужно прибавить его к 3: 3 + 2 = 5." } ] },
+      { q: "Сколько будет 2 × 6?", a: [
+        { t: "8", e: "8 — это 2 × 4. А у нас 2 × 6 = 12." },
+        { t: "10", e: "10 — это 2 × 5. Посчитай ещё раз: 2 × 6 = 12." },
+        { t: "12", ok: true, e: "Верно! 2 × 6 = 12." },
+        { t: "26", e: "Ты записал цифры рядом. Умножаем: 2 × 6 = 12." } ] },
+      { q: "Сколько будет 8 + 6?", a: [
+        { t: "13", e: "Почти! Проверь ещё раз: 8 + 6 = 14." },
+        { t: "14", ok: true, e: "Верно! 8 + 6 = 14." },
+        { t: "15", e: "Лишняя единица: 8 + 6 = 14." },
+        { t: "12", e: "12 получится, если складывать 6 + 6. А у нас 8 + 6 = 14." } ] },
+      { q: "Сколько дней в одной неделе?", a: [
+        { t: "5", e: "5 — это обычно учебные дни в школе. А в неделе 7 дней." },
+        { t: "6", e: "Почти! В неделе не 6, а 7 дней." },
+        { t: "7", ok: true, e: "Верно! В неделе 7 дней." },
+        { t: "10", e: "Слишком много! В неделе всего 7 дней." } ] }
+    ],
+    medium: [
+      { q: "Сколько будет 6 × 7?", a: [
+        { t: "36", e: "36 — это 6 × 6. А 6 × 7 = 42." },
+        { t: "42", ok: true, e: "Верно! 6 × 7 = 42." },
+        { t: "48", e: "48 — это 6 × 8. А у нас 6 × 7 = 42." },
+        { t: "54", e: "54 — это 6 × 9. А у нас 6 × 7 = 42." } ] },
+      { q: "Сколько будет 72 ÷ 8?", a: [
+        { t: "8", e: "Проверь: 8 × 8 = 64, а не 72. Правильно: 72 ÷ 8 = 9." },
+        { t: "7", e: "7 × 8 = 56, а не 72. Ответ 9." },
+        { t: "9", ok: true, e: "Верно! 9 × 8 = 72, значит 72 ÷ 8 = 9." },
+        { t: "6", e: "6 × 8 = 48 — это меньше 72. Ответ 9." } ] },
+      { q: "Реши пример: 45 + 28 = ?", a: [
+        { t: "63", e: "Ты забыл перенести десяток: 5 + 8 = 13, единица переходит в десятки. Ответ 73." },
+        { t: "73", ok: true, e: "Верно! 45 + 28 = 73." },
+        { t: "74", e: "Лишняя единица. Проверь: 45 + 28 = 73." },
+        { t: "67", e: "Проверь столбиком: 5 + 8 = 13 (3 пишем, 1 в уме), 4 + 2 + 1 = 7. Ответ 73." } ] },
+      { q: "Реши пример: 81 − 34 = ?", a: [
+        { t: "47", ok: true, e: "Верно! 81 − 34 = 47." },
+        { t: "57", e: "Ты забыл занять десяток: из 1 нельзя вычесть 4 без займа. Правильно: 11 − 4 = 7, а десятков остаётся 7 − 3 = 4. Ответ 47." },
+        { t: "53", e: "Проверь: из 1 вычесть 4 без займа нельзя. Правильно: 81 − 34 = 47." },
+        { t: "46", e: "Почти! В единицах: 11 − 4 = 7, а не 6. Ответ 47." } ] },
+      { q: "На одной полке 9 книг. Сколько книг на трёх таких полках вместе?", a: [
+        { t: "27", ok: true, e: "Верно! 9 × 3 = 27 книг." },
+        { t: "12", e: "Ты сложил 9 + 3. Нужно умножить: 9 × 3 = 27." },
+        { t: "24", e: "24 — это 8 × 3. А у нас 9 × 3 = 27." },
+        { t: "36", e: "36 было бы на четырёх полках (9 × 4). А полок три: 9 × 3 = 27." } ] },
+      { q: "Сторона квадрата 4 см. Чему равен его периметр?", a: [
+        { t: "8 см", e: "Ты сложил только две стороны. У квадрата 4 равные стороны: 4 × 4 = 16 см." },
+        { t: "12 см", e: "Это только три стороны. Периметр — все четыре: 4 × 4 = 16 см." },
+        { t: "16 см", ok: true, e: "Верно! Периметр квадрата: 4 × 4 = 16 см." },
+        { t: "20 см", e: "Пятая сторона лишняя! У квадрата 4 стороны по 4 см: 4 × 4 = 16 см." } ] },
+      { q: "Реши уравнение: x − 12 = 30. Чему равен x?", a: [
+        { t: "18", e: "Ты вычел 30 − 12. Чтобы найти уменьшаемое, нужно сложить: x = 30 + 12 = 42." },
+        { t: "42", ok: true, e: "Верно! Чтобы найти уменьшаемое, складываем: x = 30 + 12 = 42. Проверка: 42 − 12 = 30." },
+        { t: "40", e: "Ты ошибся в счёте на 2: 30 + 12 = 42." },
+        { t: "25", e: "Похоже, ты запутался в действии. Верно: x = 30 + 12 = 42." } ] },
+      { q: "Вычисли: 3 × 9 + 3 = ?", a: [
+        { t: "30", ok: true, e: "Верно! Сначала 3 × 9 = 27, потом 27 + 3 = 30." },
+        { t: "24", e: "Похоже, ты взял 3 × 8. Проверь: 3 × 9 = 27, плюс 3 = 30." },
+        { t: "27", e: "Ты выполнил только умножение и забыл прибавить 3. Ответ: 30." },
+        { t: "36", e: "Ты прибавил лишний 9. Верно: 27 + 3 = 30." } ] },
+      { q: "Сколько будет 100 − 45?", a: [
+        { t: "65", e: "Лишний десяток: 100 − 45 = 55." },
+        { t: "55", ok: true, e: "Верно! 100 − 45 = 55." },
+        { t: "45", e: "Ты ответил тем же числом, которое вычитал. Верно: 100 − 45 = 55." },
+        { t: "54", e: "Почти! Проверь: 100 − 45 = 55." } ] },
+      { q: "В классе 24 ученика. Они разбились на группы по 4 человека. Сколько получилось групп?", a: [
+        { t: "4", e: "4 — это число учеников в одной группе. А групп: 24 ÷ 4 = 6." },
+        { t: "20", e: "Ты вычел 4 из 24. Нужно делить: 24 ÷ 4 = 6 групп." },
+        { t: "6", ok: true, e: "Верно! 24 ÷ 4 = 6 групп." },
+        { t: "28", e: "Ты сложил 24 + 4. Нужно делить: 24 ÷ 4 = 6 групп." } ] }
+    ],
+    hard: [
+      { q: "Сколько будет 7 × 8?", a: [
+        { t: "54", e: "54 получится, если умножить 6 × 9. А по таблице умножения 7 × 8 = 56." },
+        { t: "56", ok: true, e: "Молодец! По таблице умножения 7 × 8 = 56." },
+        { t: "58", e: "Число похоже, но лишний «хвостик». Проверь по таблице: 7 × 8 = 56, а не 58." },
+        { t: "64", e: "64 — это 8 × 8. А у нас 7 × 8, значит ответ 56." } ] },
+      { q: "Сколько будет 63 ÷ 9?", a: [
+        { t: "6", e: "Проверь умножением: 6 × 9 = 54, а не 63. Значит, 63 ÷ 9 = 7." },
+        { t: "7", ok: true, e: "Верно! 7 × 9 = 63, поэтому 63 ÷ 9 = 7." },
+        { t: "8", e: "Проверь: 8 × 9 = 72 — это больше 63. Правильный ответ 7." },
+        { t: "9", e: "9 × 9 = 81, а у нас 63. Правильный ответ 7." } ] },
+      { q: "Реши пример: 345 + 278 = ?", a: [
+        { t: "613", e: "Ты забыл перенести единицы в следующий разряд. Считаем: 5+8=13 (3 пишем, 1 в уме), 4+7+1=12 (2 пишем, 1 в уме), 3+2+1=6. Ответ 623." },
+        { t: "623", ok: true, e: "Отлично! 345 + 278 = 623. Ты не забыл переносить разряды!" },
+        { t: "624", e: "Где-то затесалась лишняя единичка. Проверь сложение столбиком: 345 + 278 = 623." },
+        { t: "523", e: "Ты забыл прибавить единицу «в уме» к сотням: 3 + 2 + 1 = 6, а не 5. Ответ 623." } ] },
+      { q: "Реши пример: 900 − 456 = ?", a: [
+        { t: "454", e: "Ты забыл занять десяток: из 0 нельзя вычесть 5 без займа. Правильно: 900 − 456 = 444." },
+        { t: "544", e: "Нельзя вычитать из меньшей цифры большую без займа. При вычитании из нулей нужно занимать разряды. Ответ 444." },
+        { t: "444", ok: true, e: "Верно! 900 − 456 = 444. Ты отлично справился с займом разрядов!" },
+        { t: "446", e: "В единицах нужно было занять: 10 − 6 = 4, а не 6. Правильный ответ 444." } ] },
+      { q: "В классе стоят 4 ряда парт, в каждом ряду по 6 парт. Сколько всего парт в классе?", a: [
+        { t: "10", e: "10 получится при сложении 4 + 6. Но рядов по 6 парт — значит, нужно умножать: 4 × 6 = 24." },
+        { t: "24", ok: true, e: "Верно! По 6 парт взяли 4 раза: 4 × 6 = 24 парты." },
+        { t: "46", e: "46 — это просто цифры 4 и 6, записанные рядом. Задачу решаем умножением: 4 × 6 = 24." },
+        { t: "36", e: "36 было бы, если бы рядов было 6 по 6 парт. А у нас 4 ряда: 4 × 6 = 24." } ] },
+      { q: "Длина прямоугольника 5 см, а ширина 3 см. Чему равен его периметр?", a: [
+        { t: "15 см", e: "15 см² — это площадь (5 × 3). Периметр — сумма всех четырёх сторон: (5 + 3) × 2 = 16 см." },
+        { t: "8 см", e: "Ты сложил только длину и ширину, а сторон у прямоугольника четыре. Периметр: (5 + 3) × 2 = 16 см." },
+        { t: "16 см", ok: true, e: "Верно! Периметр = (5 + 3) × 2 = 16 см." },
+        { t: "11 см", e: "Ты посчитал только три стороны (5 + 3 + 3). Нужно все четыре: (5 + 3) × 2 = 16 см." } ] },
+      { q: "Вычисли: 2 + 3 × 4 = ?", a: [
+        { t: "20", e: "Сначала выполняется умножение, а потом сложение: 3 × 4 = 12, затем 2 + 12 = 14. Ты же посчитал (2 + 3) × 4." },
+        { t: "14", ok: true, e: "Верно! Сначала умножение 3 × 4 = 12, потом 2 + 12 = 14." },
+        { t: "24", e: "Ты перемножил все числа. Но по порядку действий сначала 3 × 4 = 12, потом 2 + 12 = 14." },
+        { t: "12", e: "Ты выполнил только умножение и забыл прибавить 2. Ответ: 14." } ] },
+      { q: "Реши уравнение: x + 15 = 42. Чему равен x?", a: [
+        { t: "57", e: "Ты сложил 42 + 15. Чтобы найти неизвестное слагаемое, нужно из суммы вычесть известное: x = 42 − 15 = 27." },
+        { t: "27", ok: true, e: "Верно! x = 42 − 15 = 27. Проверка: 27 + 15 = 42." },
+        { t: "37", e: "Похоже, ошибка в вычитании. Проверь: 42 − 15 = 27, а не 37." },
+        { t: "25", e: "Посчитай внимательно: 42 − 15 = 27. Проверка: 27 + 15 = 42." } ] },
+      { q: "Вычисли: 9 × 6 − 14 = ?", a: [
+        { t: "54", e: "Ты выполнил только умножение. Не забудь вычесть 14: 54 − 14 = 40." },
+        { t: "44", e: "Ты вычел 10 вместо 14. Правильно: 54 − 14 = 40." },
+        { t: "40", ok: true, e: "Верно! 9 × 6 = 54, затем 54 − 14 = 40." },
+        { t: "68", e: "Ты прибавил 14 вместо вычитания. Правильно: 54 − 14 = 40." } ] },
+      { q: "Сколько минут в двух часах?", a: [
+        { t: "60", e: "60 минут — это один час. А у нас два часа: 60 × 2 = 120 минут." },
+        { t: "120", ok: true, e: "Верно! В одном часе 60 минут, значит в двух: 60 × 2 = 120 минут." },
+        { t: "20", e: "Похоже, ты умножил 10 × 2. Вспомни: в одном часе 60 минут, значит 60 × 2 = 120." },
+        { t: "100", e: "Часы считаются не сотнями! В одном часе 60 минут: 60 × 2 = 120 минут." } ] }
+    ]
+  };
+
+  /* ---------- НОВОЕ: генератор вопросов для 1–11 классов ---------- */
+  function randInt(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
+  function pickOne(arr){ return arr[randInt(0, arr.length - 1)]; }
+  function fmt(n){ return String(n).replace(/-/g, "−"); }
+
+  function shuffle(arr){
+    const b = arr.slice();
+    for (let i = b.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = b[i]; b[i] = b[j]; b[j] = tmp;
+    }
+    return b;
+  }
+
+  function dedupeDistractors(distr, correctStr){
+    const used = [correctStr];
+    const out = [];
+    for (let i = 0; i < distr.length; i++){
+      if (out.length >= 3) break;
+      let t = distr[i].t;
+      if (/^[-−]?\d+$/.test(t)){
+        let v = parseInt(String(t).replace(/−/g, "-"), 10);
+        while (used.indexOf(fmt(v)) !== -1) v += (v >= 0 ? 1 : -1);
+        t = fmt(v);
+      }
+      if (used.indexOf(t) !== -1) continue;
+      used.push(t);
+      out.push({ t: t, e: distr[i].e });
+    }
+    return out;
+  }
+
+  function buildQ(text, correctStr, correctExpl, distr){
+    const opts = dedupeDistractors(distr, correctStr);
+    opts.push({ t: correctStr, ok: true, e: correctExpl });
+    return { q: text, a: shuffle(opts) };
+  }
+
+  /* обычный пример + − × ÷ */
+  function arithQ(a, op, b){
+    let correct;
+    if (op === "+") correct = a + b;
+    else if (op === "−") correct = a - b;
+    else if (op === "×") correct = a * b;
+    else correct = a / b;
+    const expr = a + " " + op + " " + b;
+    const cs = String(correct);
+    const expl = "Верно! " + expr + " = " + cs + ".";
+    let distr;
+    if (op === "+"){
+      distr = [
+        { t: String(a * b), e: "Похоже, ты перемножил числа вместо сложения. Нужно: " + expr + " = " + cs + "." },
+        { t: String(correct + 10), e: "Лишний десяток! Проверь ещё раз: " + expr + " = " + cs + "." },
+        { t: String(correct - 1), e: "Ты ошибся всего на 1. Проверь: " + expr + " = " + cs + "." }
+      ];
+    } else if (op === "−"){
+      distr = [
+        { t: String(a + b), e: "Ты сложил числа вместо вычитания. Нужно: " + expr + " = " + cs + "." },
+        { t: String(correct + 1), e: "Ты ошибся на 1. Проверь: " + expr + " = " + cs + "." },
+        { t: String(correct - 10), e: "Ты вычел лишний десяток. Проверь: " + expr + " = " + cs + "." }
+      ];
+    } else if (op === "×"){
+      distr = [
+        { t: String(a + b), e: "Ты сложил числа вместо умножения. Нужно: " + expr + " = " + cs + "." },
+        { t: String(correct + a), e: "Ты прибавил лишний раз число " + a + ". Проверь: " + expr + " = " + cs + "." },
+        { t: String(correct - a), e: "Одного слагаемого не хватает. Проверь: " + expr + " = " + cs + "." }
+      ];
+    } else {
+      distr = [
+        { t: String(correct + 1), e: "Проверь умножением: " + b + " × " + cs + " = " + a + ". Значит, частное меньше правильного." },
+        { t: String(correct - 1), e: "Проверь умножением: " + b + " × " + cs + " = " + a + ". Значит, частное больше твоего ответа." },
+        { t: String(a - b), e: "Ты вычел вместо деления. Нужно: " + expr + " = " + cs + "." }
+      ];
+    }
+    return buildQ("Сколько будет " + expr + "?", cs, expl, distr);
+  }
+
+  function arithDivQ(b, qMax){ return arithQ(b * randInt(2, qMax), "÷", b); }
+
+  function chainAddSubQ(a, b, c){
+    const correct = a + b - c;
+    const expr = a + " + " + b + " − " + c;
+    return buildQ("Вычисли: " + expr, String(correct),
+      "Верно! " + a + " + " + b + " = " + (a + b) + ", потом " + (a + b) + " − " + c + " = " + correct + ".", [
+        { t: String(a + b + c), e: "Последнее число нужно вычесть, а не прибавить. Ответ: " + correct + "." },
+        { t: String(correct + 1), e: "Ошибка на 1. " + expr + " = " + correct + "." },
+        { t: String(a + b), e: "Ты остановился на середине: осталось вычесть " + c + ". Ответ: " + correct + "." }
+      ]);
+  }
+
+  /* порядок действий: a + b × c или a × b − c */
+  function orderQ(){
+    if (Math.random() < 0.5){
+      const a = randInt(2, 9), b = randInt(2, 9), c = randInt(2, 9);
+      const correct = a + b * c;
+      const expr = a + " + " + b + " × " + c;
+      return buildQ("Вычисли: " + expr, String(correct),
+        "Верно! Сначала умножение: " + b + " × " + c + " = " + (b * c) + ", потом " + a + " + " + (b * c) + " = " + correct + ".", [
+          { t: String((a + b) * c), e: "Сначала выполняют умножение, а не сложение. Правильно: " + b + " × " + c + " = " + (b * c) + ", потом " + a + " + " + (b * c) + " = " + correct + "." },
+          { t: String(correct + 1), e: "Ты ошибся на 1. Сначала " + b + " × " + c + " = " + (b * c) + ", потом " + a + " + " + (b * c) + " = " + correct + "." },
+          { t: String(a + b + c), e: "Ты сложил все числа. Но сначала умножение: " + expr + " = " + correct + "." }
+        ]);
+    } else {
+      const a = randInt(2, 9), b = randInt(2, 9), c = randInt(1, a * b - 1);
+      const correct = a * b - c;
+      const expr = a + " × " + b + " − " + c;
+      return buildQ("Вычисли: " + expr, String(correct),
+        "Верно! Сначала " + a + " × " + b + " = " + (a * b) + ", потом " + (a * b) + " − " + c + " = " + correct + ".", [
+          { t: String(a * (b - c)), e: "Сначала умножение, потом вычитание. Правильно: " + a + " × " + b + " = " + (a * b) + ", затем минус " + c + ": ответ " + correct + "." },
+          { t: String(correct + 1), e: "Ошибся на 1. " + a + " × " + b + " = " + (a * b) + ", " + (a * b) + " − " + c + " = " + correct + "." },
+          { t: String(a * b + c), e: "Ты прибавил " + c + " вместо вычитания. Ответ: " + correct + "." }
+        ]);
+    }
+  }
+
+  function bracketQ(){
+    const a = randInt(2, 9), b = randInt(2, 9), c = randInt(2, 6);
+    const correct = (a + b) * c;
+    const expr = "(" + a + " + " + b + ") × " + c;
+    return buildQ("Вычисли: " + expr, String(correct),
+      "Верно! Сначала скобки: " + a + " + " + b + " = " + (a + b) + ", потом " + (a + b) + " × " + c + " = " + correct + ".", [
+        { t: String(a + b * c), e: "Сначала выполняют действия в скобках: " + a + " + " + b + " = " + (a + b) + ", потом умножение. Ответ: " + correct + "." },
+        { t: String(correct + c), e: "Лишний раз прибавил " + c + ". " + expr + " = " + correct + "." },
+        { t: String(correct - c), e: "Проверь скобки: (" + a + " + " + b + ") × " + c + " = " + correct + "." }
+      ]);
+  }
+
+  /* отрицательные числа (6 класс) */
+  function negAddQ(){
+    const a = -randInt(1, 15), b = randInt(1, 20);
+    const correct = a + b;
+    const expr = fmt(a) + " + " + fmt(b);
+    return buildQ("Вычисли: " + expr, fmt(correct),
+      "Верно! " + expr + " = " + fmt(correct) + ".", [
+        { t: fmt(-a + b), e: "Ты потерял минус у числа " + fmt(a) + ". На самом деле " + expr + " = " + fmt(correct) + "." },
+        { t: fmt(-correct), e: "Ты перепутал знак у ответа. Правильно: " + expr + " = " + fmt(correct) + "." },
+        { t: fmt(a - b), e: "Ты вычел вместо сложения. Правильно: " + expr + " = " + fmt(correct) + "." }
+      ]);
+  }
+  function negSubQ(){
+    const a = -randInt(1, 15), b = randInt(1, 15);
+    const correct = a - b;
+    const expr = fmt(a) + " − " + fmt(b);
+    return buildQ("Вычисли: " + expr, fmt(correct),
+      "Верно! Из отрицательного числа вычитаем ещё: " + expr + " = " + fmt(correct) + ".", [
+        { t: fmt(-correct), e: "Знак ответа должен быть минус. Правильно: " + expr + " = " + fmt(correct) + "." },
+        { t: fmt(Math.abs(correct)), e: "Ты потерял минус в ответе. Правильно: " + expr + " = " + fmt(correct) + "." },
+        { t: fmt(a + b), e: "Ты перепутал вычитание со сложением. Правильно: " + expr + " = " + fmt(correct) + "." }
+      ]);
+  }
+  function negMulQ(){
+    const a = -randInt(2, 9), b = randInt(2, 9);
+    const correct = a * b;
+    const expr = fmt(a) + " × " + fmt(b);
+    return buildQ("Вычисли: " + expr, fmt(correct),
+      "Верно! Минус на плюс даёт минус: " + expr + " = " + fmt(correct) + ".", [
+        { t: fmt(-correct), e: "Минус на плюс даёт минус, а не плюс. Правильно: " + expr + " = " + fmt(correct) + "." },
+        { t: fmt(a - b), e: "Ты вычел вместо умножения. Правильно: " + expr + " = " + fmt(correct) + "." },
+        { t: fmt(a + b), e: "Ты сложил вместо умножения. Правильно: " + expr + " = " + fmt(correct) + "." }
+      ]);
+  }
+  function negDivQ(){
+    const b = randInt(2, 9), q = -randInt(2, 9);
+    const a = b * q;
+    const expr = fmt(a) + " ÷ " + fmt(b);
+    return buildQ("Вычисли: " + expr, fmt(q),
+      "Верно! Минус на плюс даёт минус: " + expr + " = " + fmt(q) + ".", [
+        { t: fmt(-q), e: "Знак ответа должен быть минус. Проверь умножением: " + fmt(b) + " × " + fmt(q) + " = " + fmt(a) + "." },
+        { t: fmt(q + 1), e: "Проверь умножением: " + fmt(b) + " × " + fmt(q) + " = " + fmt(a) + ". Ответ: " + fmt(q) + "." },
+        { t: fmt(q - 1), e: "Проверь умножением: " + fmt(b) + " × " + fmt(q) + " = " + fmt(a) + ". Ответ: " + fmt(q) + "." }
+      ]);
+  }
+
+  /* проценты */
+  function percentQ(){
+    const p = pickOne([10, 20, 25, 50, 75]);
+    const n = pickOne([20, 40, 60, 80, 100, 120, 160, 200]);
+    const correct = n * p / 100;
+    return buildQ("Найди " + p + "% от числа " + n + ".", String(correct),
+      "Верно! " + p + "% от " + n + " — это " + n + " ÷ 100 × " + p + " = " + correct + ".", [
+        { t: String(correct * 2), e: "Ты взял в два раза больше, чем нужно. " + p + "% от " + n + " = " + n + " ÷ 100 × " + p + " = " + correct + "." },
+        { t: String(n - correct), e: "Ты вычел проценты из числа. Процент — это часть числа: " + n + " ÷ 100 × " + p + " = " + correct + "." },
+        { t: String(p), e: p + " — это сами проценты, а нужно найти число. " + n + " ÷ 100 × " + p + " = " + correct + "." }
+      ]);
+  }
+
+  /* уравнения */
+  function eqAddQ(big){
+    const a = big ? randInt(10, 60) : randInt(2, 15);
+    const x = big ? randInt(10, 60) : randInt(1, 15);
+    const b = a + x;
+    return buildQ("Реши уравнение: x + " + a + " = " + b + ". Чему равен x?", String(x),
+      "Верно! Чтобы найти неизвестное слагаемое, вычитаем: " + b + " − " + a + " = " + x + ".", [
+        { t: String(b + a), e: "Ты сложил " + b + " и " + a + ". Нужно вычесть: x = " + b + " − " + a + " = " + x + "." },
+        { t: String(x + 1), e: "Ошибка на 1. Проверь: " + b + " − " + a + " = " + x + "." },
+        { t: String(a - b), e: "Ты вычитал наоборот. Правильно: " + b + " − " + a + " = " + x + "." }
+      ]);
+  }
+  function eqSubQ(){
+    const a = randInt(2, 20), x = randInt(a + 1, a + 40);
+    const b = x - a;
+    return buildQ("Реши уравнение: x − " + a + " = " + b + ". Чему равен x?", String(x),
+      "Верно! Чтобы найти уменьшаемое, складываем: " + b + " + " + a + " = " + x + ".", [
+        { t: String(b - a), e: "Ты вычел " + a + ". Нужно сложить: x = " + b + " + " + a + " = " + x + "." },
+        { t: String(b), e: "Это результат вычитания, а нужно найти уменьшаемое: " + b + " + " + a + " = " + x + "." },
+        { t: String(x - 1), e: "Ошибка на 1: " + b + " + " + a + " = " + x + "." }
+      ]);
+  }
+  function eqMulQ(){
+    const m = randInt(2, 9), x = randInt(2, 12);
+    const b = m * x;
+    return buildQ("Реши уравнение: " + m + " · x = " + b + ". Чему равен x?", String(x),
+      "Верно! Чтобы найти множитель, делим: " + b + " ÷ " + m + " = " + x + ".", [
+        { t: String(b * m), e: "Ты умножил вместо деления. Нужно: " + b + " ÷ " + m + " = " + x + "." },
+        { t: String(b - m), e: "Ты вычел. Нужно делить: " + b + " ÷ " + m + " = " + x + "." },
+        { t: String(x + 1), e: "Проверь умножением: " + m + " × " + x + " = " + b + ". Ответ: " + x + "." }
+      ]);
+  }
+  function eqTwoQ(){
+    const m = randInt(2, 6), x = randInt(2, 12), add = m * randInt(1, 5);
+    const c = m * x + add;
+    return buildQ("Реши уравнение: " + m + "x + " + add + " = " + c + ". Чему равен x?", String(x),
+      "Верно! Сначала вычитаем: " + c + " − " + add + " = " + (c - add) + ", потом делим: " + (c - add) + " ÷ " + m + " = " + x + ".", [
+        { t: String((c + add) / m), e: "Ты прибавил " + add + " вместо вычитания. Сначала: " + c + " − " + add + " = " + (c - add) + ", потом ÷ " + m + ". Ответ: " + x + "." },
+        { t: String(x + 1), e: "Проверь: " + m + " × " + x + " + " + add + " = " + c + ". Ответ: " + x + "." },
+        { t: String(c - add), e: "Это только первый шаг: " + c + " − " + add + " = " + (c - add) + ". Осталось разделить на " + m + ": ответ " + x + "." }
+      ]);
+  }
+
+  /* степени и корни */
+  function powerQ(maxBase, maxExp){
+    const a = randInt(2, maxBase), n = randInt(2, maxExp);
+    const correct = Math.pow(a, n);
+    return buildQ("Вычисли: " + a + " в степени " + n, String(correct),
+      "Верно! " + a + " в степени " + n + " — это " + a + ", умноженное на себя " + n + " раз: " + correct + ".", [
+        { t: String(a * n), e: "Ты умножил " + a + " на " + n + ". Степень — это умножение числа на само себя " + n + " раз. Ответ: " + correct + "." },
+        { t: String(Math.pow(a, n - 1)), e: "Ты умножил " + a + " только " + (n - 1) + " раз, а нужно " + n + ". Ответ: " + correct + "." },
+        { t: String(correct + a), e: "Небольшая ошибка в счёте. " + a + " в степени " + n + " = " + correct + "." }
+      ]);
+  }
+  function sqrtQ(maxR){
+    const r = randInt(3, maxR);
+    const n = r * r;
+    return buildQ("Чему равен квадратный корень из " + n + "? (√" + n + ")", String(r),
+      "Верно! " + r + " × " + r + " = " + n + ", значит √" + n + " = " + r + ".", [
+        { t: String(Math.round(n / 2)), e: "Ты разделил число пополам. Корень — это число, квадрат которого равен " + n + ": это " + r + "." },
+        { t: String(r + 1), e: "Проверь: " + (r + 1) + " × " + (r + 1) + " = " + ((r + 1) * (r + 1)) + ", а не " + n + ". Ответ: " + r + "." },
+        { t: String(r - 1), e: "Проверь: " + (r - 1) + " × " + (r - 1) + " = " + ((r - 1) * (r - 1)) + ", а не " + n + ". Ответ: " + r + "." }
+      ]);
+  }
+  function sqEqQ(){
+    const r = randInt(3, 12);
+    return buildQ("Реши уравнение: x² = " + (r * r) + " (x > 0)", String(r),
+      "Верно! " + r + " × " + r + " = " + (r * r) + ", значит x = " + r + ".", [
+        { t: String(r * 2), e: "Ты умножил число на 2 вместо извлечения корня. Корень из " + (r * r) + " — это " + r + "." },
+        { t: String(Math.round(r * r / 2)), e: "Ты разделил число пополам. Нужно найти число, квадрат которого равен " + (r * r) + ": это " + r + "." },
+        { t: String(r + 1), e: "Проверь: " + (r + 1) + "² = " + ((r + 1) * (r + 1)) + ", а нужно " + (r * r) + ". Ответ: " + r + "." }
+      ]);
+  }
+
+  /* прогрессия и квадрат суммы (9 класс) */
+  function progressionQ(){
+    const a1 = randInt(1, 10), d = randInt(2, 6), k = randInt(4, 6);
+    const correct = a1 + d * (k - 1);
+    return buildQ("В арифметической прогрессии a₁ = " + a1 + ", разность d = " + d + ". Найди a₍" + k + "₎.",
+      String(correct),
+      "Верно! Формула: a₍" + k + "₎ = a₁ + d × (" + k + " − 1) = " + a1 + " + " + d + " × " + (k - 1) + " = " + correct + ".", [
+        { t: String(a1 + d * k), e: "Ты прибавил разность " + k + " раз, а нужно " + (k - 1) + ". Ответ: " + correct + "." },
+        { t: String(a1 + d * (k - 2)), e: "Ты прибавил разность на один раз меньше, нужно " + (k - 1) + " раз. Ответ: " + correct + "." },
+        { t: String(a1 * k), e: "Ты умножил первый член на номер. Формула: a₍" + k + "₎ = a₁ + d × " + (k - 1) + " = " + correct + "." }
+      ]);
+  }
+  function binomQ(){
+    const a = randInt(1, 9), b = randInt(1, 9);
+    const correct = (a + b) * (a + b);
+    return buildQ("Вычисли: (" + a + " + " + b + ")²", String(correct),
+      "Верно! (" + a + " + " + b + ")² = " + (a + b) + "² = " + correct + ".", [
+        { t: String(a * a + b * b), e: "Ты возвёл в квадрат каждое слагаемое. Но (a + b)² = a² + 2ab + b². Правильно: " + (a + b) + "² = " + correct + "." },
+        { t: String(a * b), e: "Ты перемножил числа. Сначала скобки: " + a + " + " + b + " = " + (a + b) + ", потом квадрат: " + correct + "." },
+        { t: String(correct + 1), e: "Ошибка на 1. (" + a + " + " + b + ")² = " + correct + "." }
+      ]);
+  }
+
+  /* тригонометрия (10 класс) */
+  const TRIG_FACTS = [
+    { q: "Чему равен sin 30°?", ok: "0,5", wrongs: [["1", "1 — это sin 90°, а sin 30° = 0,5."], ["0", "0 — это sin 0°. Запомни: sin 30° = 0,5."], ["0,7", "0,7 ≈ sin 45°. А sin 30° = 0,5."]] },
+    { q: "Чему равен cos 60°?", ok: "0,5", wrongs: [["1", "1 — это cos 0°. А cos 60° = 0,5."], ["0", "0 — это cos 90°. А cos 60° = 0,5."], ["0,7", "0,7 ≈ cos 45°. А cos 60° = 0,5."]] },
+    { q: "Чему равен sin 90°?", ok: "1", wrongs: [["0", "0 — это sin 0°. А sin 90° = 1."], ["0,5", "0,5 — это sin 30°. А sin 90° = 1."], ["0,7", "0,7 ≈ sin 45°. А sin 90° = 1."]] },
+    { q: "Чему равен cos 0°?", ok: "1", wrongs: [["0", "0 — это cos 90°. А cos 0° = 1."], ["0,5", "0,5 — это cos 60°. А cos 0° = 1."], ["−1", "−1 — это cos 180°. А cos 0° = 1."]] },
+    { q: "Чему равен tg 45°?", ok: "1", wrongs: [["0", "0 — это tg 0°. А tg 45° = 1."], ["0,5", "Тангенс 45° равен 1, а не 0,5."], ["2", "Нет, tg 45° = 1, ведь синус и косинус 45° равны."]] },
+    { q: "Чему равен sin 0°?", ok: "0", wrongs: [["1", "1 — это sin 90°. А sin 0° = 0."], ["0,5", "0,5 — это sin 30°. А sin 0° = 0."], ["−1", "−1 — это sin 270°. А sin 0° = 0."]] },
+    { q: "Чему равен cos 90°?", ok: "0", wrongs: [["1", "1 — это cos 0°. А cos 90° = 0."], ["0,5", "0,5 — это cos 60°. А cos 90° = 0."], ["−1", "−1 — это cos 180°. А cos 90° = 0."]] },
+    { q: "Чему равен sin 45°?", ok: "0,7", wrongs: [["0,5", "0,5 — это sin 30°. А sin 45° ≈ 0,7."], ["1", "1 — это sin 90°. А sin 45° ≈ 0,7."], ["0,87", "0,87 — это sin 60°. А sin 45° ≈ 0,7."]] },
+    { q: "Чему равен cos 45°?", ok: "0,7", wrongs: [["0,5", "0,5 — это cos 60°. А cos 45° ≈ 0,7."], ["1", "1 — это cos 0°. А cos 45° ≈ 0,7."], ["0,87", "0,87 — это cos 30°. А cos 45° ≈ 0,7."]] },
+    { q: "Чему равен sin 60°?", ok: "0,87", wrongs: [["0,5", "0,5 — это sin 30°. А sin 60° ≈ 0,87."], ["0,7", "0,7 — это sin 45°. А sin 60° ≈ 0,87."], ["1", "1 — это sin 90°. А sin 60° ≈ 0,87."]] },
+    { q: "Чему равен cos 30°?", ok: "0,87", wrongs: [["0,5", "0,5 — это cos 60°. А cos 30° ≈ 0,87."], ["0,7", "0,7 — это cos 45°. А cos 30° ≈ 0,87."], ["1", "1 — это cos 0°. А cos 30° ≈ 0,87."]] },
+    { q: "Чему равно sin²α + cos²α?", ok: "1", wrongs: [["0", "Основное тригонометрическое тождество: sin²α + cos²α = 1."], ["2", "Сумма квадратов синуса и косинуса равна 1, а не 2."], ["0,5", "Запомни тождество: sin²α + cos²α = 1."]] }
+  ];
+  function trigQ(){
+    const f = pickOne(TRIG_FACTS);
+    return buildQ(f.q, f.ok,
+      "Верно! " + f.q.replace("Чему равен ", "").replace("Чему равно ", "").replace("?", "") + " = " + f.ok + ". Это табличное значение.",
+      f.wrongs.map(w => ({ t: w[0], e: w[1] })));
+  }
+  const SCALED_TRIG = [
+    { q: "Найди: 2 · sin 30°", ok: "1", wrongs: [["0,5", "Ты не умножил на 2: sin 30° = 0,5, а 2 · 0,5 = 1."], ["2", "Проверь: 2 · 0,5 = 1, а не 2."], ["1,5", "Проверь: 2 · 0,5 = 1, а не 1,5."]] },
+    { q: "Найди: 2 · cos 60°", ok: "1", wrongs: [["0,5", "Ты забыл умножить на 2: 2 · 0,5 = 1."], ["2", "Проверь: 2 · 0,5 = 1, а не 2."], ["1,5", "Проверь: 2 · 0,5 = 1, а не 1,5."]] },
+    { q: "Найди: 4 · sin 30°", ok: "2", wrongs: [["1", "Ты умножил на 2 вместо 4: 4 · 0,5 = 2."], ["4", "0,5 × 4 = 2, а не 4."], ["0,5", "Ты забыл умножить: 4 · 0,5 = 2."]] },
+    { q: "Найди: 3 · cos 0°", ok: "3", wrongs: [["1", "cos 0° = 1, но нужно умножить: 3 · 1 = 3."], ["0", "0 — это косинус 90°. А 3 · cos 0° = 3 · 1 = 3."], ["2", "Проверь: cos 0° = 1, значит 3 · 1 = 3."]] }
+  ];
+  function scaledTrigQ(){
+    const f = pickOne(SCALED_TRIG);
+    return buildQ(f.q, f.ok,
+      "Верно! " + f.q + " = " + f.ok + ".",
+      f.wrongs.map(w => ({ t: w[0], e: w[1] })));
+  }
+
+  /* логарифмы (11 класс) */
+  const SUB_MAP = { 2: "₂", 3: "₃", 5: "₅", 10: "₁₀" };
+  function logQ(){
+    const base = pickOne([2, 3, 5]);
+    const exp = randInt(2, 4);
+    const val = Math.pow(base, exp);
+    return buildQ("Вычисли: log" + SUB_MAP[base] + " " + val, String(exp),
+      "Верно! " + base + " в степени " + exp + " равно " + val + ", значит логарифм равен " + exp + ".", [
+        { t: String(exp + 1), e: "Проверь: " + base + " в степени " + (exp + 1) + " — это " + Math.pow(base, exp + 1) + ", а не " + val + ". Ответ: " + exp + "." },
+        { t: String(exp - 1), e: "Проверь: " + base + " в степени " + (exp - 1) + " — это " + Math.pow(base, exp - 1) + ", а не " + val + ". Ответ: " + exp + "." },
+        { t: String(val / base), e: "Ты разделил число на основание. Логарифм — это показатель степени: " + exp + "." }
+      ]);
+  }
+  function logSumQ(){
+    const base = pickOne([2, 3]);
+    const e1 = randInt(1, 3), e2 = randInt(1, 3);
+    const v1 = Math.pow(base, e1), v2 = Math.pow(base, e2);
+    const correct = e1 + e2;
+    return buildQ("Вычисли: log" + SUB_MAP[base] + " " + v1 + " + log" + SUB_MAP[base] + " " + v2, String(correct),
+      "Верно! Первый логарифм равен " + e1 + ", второй " + e2 + ", их сумма: " + correct + ".", [
+        { t: String(e1 * e2), e: "Ты перемножил значения логарифмов. Нужно сложить: " + e1 + " + " + e2 + " = " + correct + "." },
+        { t: String(correct + 1), e: "Ошибка на 1: " + e1 + " + " + e2 + " = " + correct + "." },
+        { t: String(correct - 1), e: "Проверь каждый логарифм отдельно и сложи: " + e1 + " + " + e2 + " = " + correct + "." }
+      ]);
+  }
+  function expEqQ(){
+    const base = pickOne([2, 3, 4]);
+    const exp = randInt(2, 5);
+    const val = Math.pow(base, exp);
+    return buildQ("Реши уравнение: " + base + "ˣ = " + val, String(exp),
+      "Верно! " + base + " в степени " + exp + " равно " + val + ", значит x = " + exp + ".", [
+        { t: String(exp + 1), e: base + " в степени " + (exp + 1) + " = " + Math.pow(base, exp + 1) + ", а нужно " + val + ". Ответ: " + exp + "." },
+        { t: String(exp - 1), e: base + " в степени " + (exp - 1) + " = " + Math.pow(base, exp - 1) + ", а нужно " + val + ". Ответ: " + exp + "." },
+        { t: String(base), e: "Ты ответил основанием. Нужно найти показатель степени: " + exp + "." }
+      ]);
+  }
+
+  /* наборы генераторов по классам и сложностям */
+  const GENERATORS = {
+    1: {
+      easy: [
+        function(){ return arithQ(randInt(1, 5), "+", randInt(1, 4)); },
+        function(){ return arithQ(randInt(4, 9), "−", randInt(1, 3)); }
+      ],
+      medium: [
+        function(){ return arithQ(randInt(2, 10), "+", randInt(2, 9)); },
+        function(){ return arithQ(randInt(11, 18), "−", randInt(2, 9)); },
+        function(){ return arithQ(randInt(1, 9), "+", randInt(1, 9)); }
+      ],
+      hard: [
+        function(){ return arithQ(randInt(9, 20), "+", randInt(2, 15)); },
+        function(){ return arithQ(randInt(12, 20), "−", randInt(3, 11)); },
+        function(){ return chainAddSubQ(randInt(5, 10), randInt(1, 5), randInt(1, 4)); }
+      ]
+    },
+    2: {
+      easy: [
+        function(){ return arithQ(randInt(10, 50), "+", randInt(5, 40)); },
+        function(){ return arithQ(randInt(15, 60), "−", randInt(5, 14)); },
+        function(){ return arithQ(pickOne([2, 3]), "×", randInt(2, 5)); }
+      ],
+      medium: [
+        function(){ return arithQ(randInt(20, 90), "+", randInt(10, 60)); },
+        function(){ return arithQ(randInt(40, 99), "−", randInt(11, 39)); },
+        function(){ return arithQ(randInt(2, 5), "×", randInt(2, 9)); },
+        function(){ return arithDivQ(randInt(2, 5), 9); }
+      ],
+      hard: [
+        function(){ return arithQ(randInt(36, 99), "+", randInt(11, 60)); },
+        function(){ return arithQ(randInt(50, 99), "−", randInt(13, 49)); },
+        function(){ return arithQ(randInt(2, 9), "×", randInt(2, 9)); },
+        function(){ return arithDivQ(randInt(2, 9), 9); }
+      ]
+    },
+    4: {
+      easy: [
+        function(){ return arithQ(randInt(100, 800), "+", randInt(50, 190)); },
+        function(){ return arithQ(randInt(300, 900), "−", randInt(50, 250)); },
+        function(){ return arithQ(randInt(2, 9), "×", randInt(2, 6)); }
+      ],
+      medium: [
+        function(){ return arithQ(randInt(100, 700), "+", randInt(150, 299)); },
+        function(){ return arithQ(randInt(400, 999), "−", randInt(123, 399)); },
+        function(){ return arithQ(randInt(11, 25), "×", randInt(2, 9)); },
+        function(){ return arithDivQ(randInt(3, 9), 30); }
+      ],
+      hard: [
+        function(){ return arithQ(randInt(11, 25), "×", randInt(11, 19)); },
+        function(){ return arithDivQ(randInt(4, 12), 40); },
+        function(){ return orderQ(); },
+        function(){ return arithQ(randInt(234, 899), "+", randInt(156, 345)); }
+      ]
+    },
+    5: {
+      easy: [
+        function(){ return arithQ(randInt(1000, 8000), "+", randInt(500, 1900)); },
+        function(){ return arithQ(randInt(3000, 9500), "−", randInt(700, 2900)); },
+        function(){ return arithQ(randInt(12, 30), "×", randInt(3, 9)); }
+      ],
+      medium: [
+        function(){ return orderQ(); },
+        function(){ return arithDivQ(randInt(6, 15), 60); },
+        function(){ return arithQ(randInt(25, 99), "×", randInt(11, 25)); }
+      ],
+      hard: [
+        function(){ return bracketQ(); },
+        function(){ return orderQ(); },
+        function(){ return percentQ(); },
+        function(){ return arithQ(randInt(123, 999), "×", randInt(11, 45)); }
+      ]
+    },
+    6: {
+      easy: [
+        function(){ return negAddQ(); },
+        function(){ return negSubQ(); },
+        function(){ return arithQ(randInt(100, 900), "−", randInt(150, 600)); }
+      ],
+      medium: [
+        function(){ return negMulQ(); },
+        function(){ return negDivQ(); },
+        function(){ return percentQ(); }
+      ],
+      hard: [
+        function(){ return negMulQ(); },
+        function(){ return negSubQ(); },
+        function(){ return percentQ(); },
+        function(){ return negDivQ(); }
+      ]
+    },
+    7: {
+      easy: [
+        function(){ return eqAddQ(false); },
+        function(){ return eqSubQ(); }
+      ],
+      medium: [
+        function(){ return eqMulQ(); },
+        function(){ return powerQ(6, 3); },
+        function(){ return eqAddQ(true); }
+      ],
+      hard: [
+        function(){ return eqTwoQ(); },
+        function(){ return powerQ(9, 3); },
+        function(){ return eqMulQ(); }
+      ]
+    },
+    8: {
+      easy: [
+        function(){ return sqrtQ(9); },
+        function(){ return powerQ(9, 2); }
+      ],
+      medium: [
+        function(){ return sqrtQ(15); },
+        function(){ return eqTwoQ(); },
+        function(){ return sqEqQ(); }
+      ],
+      hard: [
+        function(){ return sqrtQ(20); },
+        function(){ return sqEqQ(); },
+        function(){ return eqTwoQ(); }
+      ]
+    },
+    9: {
+      easy: [
+        function(){ return binomQ(); },
+        function(){ return powerQ(5, 3); }
+      ],
+      medium: [
+        function(){ return progressionQ(); },
+        function(){ return binomQ(); }
+      ],
+      hard: [
+        function(){ return progressionQ(); },
+        function(){ return binomQ(); },
+        function(){ return powerQ(4, 4); }
+      ]
+    },
+    10: {
+      easy: [ function(){ return trigQ(); } ],
+      medium: [ function(){ return trigQ(); } ],
+      hard: [
+        function(){ return trigQ(); },
+        function(){ return scaledTrigQ(); }
+      ]
+    },
+    11: {
+      easy: [ function(){ return logQ(); } ],
+      medium: [
+        function(){ return logQ(); },
+        function(){ return logSumQ(); }
+      ],
+      hard: [
+        function(){ return logSumQ(); },
+        function(){ return expEqQ(); },
+        function(){ return logQ(); }
+      ]
+    }
+  };
+
+  function buildGeneratedQuiz(grade, level){
+    const pool = GENERATORS[grade][level];
+    const qs = [];
+    const seen = {};
+    let guard = 0;
+    while (qs.length < 10 && guard < 300){
+      guard++;
+      const q = pickOne(pool)();
+      if (seen[q.q]) continue;
+      seen[q.q] = true;
+      qs.push(q);
+    }
+    while (qs.length < 10) qs.push(pickOne(pool)());
+    return qs;
+  }
+
+  const ACHIEVEMENTS = [
+    { id: "first",       emoji: "🥉", name: "Первый шаг",          desc: "Пройди свой первый тест",                    check: s => true },
+    { id: "good",        emoji: "😊", name: "Хорошист",            desc: "Набери 7 или больше баллов",                 check: s => s.score >= 7 },
+    { id: "excellent",   emoji: "🏅", name: "Отличник",            desc: "Набери 9 или больше баллов",                 check: s => s.score >= 9 },
+    { id: "perfect",     emoji: "💯", name: "Идеально!",           desc: "Реши все 10 вопросов без ошибок",            check: s => s.score === s.total },
+    { id: "streak5",     emoji: "🔥", name: "Огненная серия",      desc: "5 правильных ответов подряд",                check: s => s.bestStreak >= 5 },
+    { id: "easyDone",    emoji: "🐢", name: "Лёгкий старт",        desc: "Пройди лёгкий уровень",                      check: s => s.levelKey === "easy" },
+    { id: "medDone",     emoji: "🐰", name: "Смелый зайчик",       desc: "Пройди средний уровень",                     check: s => s.levelKey === "medium" },
+    { id: "hardDone",    emoji: "🚀", name: "Ракета",              desc: "Пройди сложный уровень",                     check: s => s.levelKey === "hard" },
+    { id: "allLevels",   emoji: "🏆", name: "Покоритель",          desc: "Пройди все три уровня сложности",            check: s => s.levelsDone.size >= 3 },
+    { id: "threeGrades", emoji: "🎒", name: "Путешествие по классам", desc: "Пройди тест в трёх разных классах",      check: s => s.gradesDone.size >= 3 }
+  ];
+
+  const LETTERS = ["А", "Б", "В", "Г"];
+
+  /* ---------- надёжное сохранение ---------- */
+  const memoryStorage = {};
+  function storageReadAll(key){
+    const found = [];
+    if (memoryStorage[key] !== undefined) found.push(memoryStorage[key]);
+    try{ const v1 = localStorage.getItem(key); if (v1 !== null) found.push(v1); }catch(e){}
+    try{ const v2 = sessionStorage.getItem(key); if (v2 !== null) found.push(v2); }catch(e){}
+    return found;
+  }
+  function storageWriteAll(key, value){
+    memoryStorage[key] = value;
+    try{ localStorage.setItem(key, value); }catch(e){}
+    try{ sessionStorage.setItem(key, value); }catch(e){}
+  }
+  function loadArray(key){
+    const merged = [];
+    storageReadAll(key).forEach(raw => {
+      try{
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)){
+          arr.forEach(id => {
+            if (typeof id === "string" && merged.indexOf(id) === -1) merged.push(id);
+          });
+        }
+      }catch(e){}
+    });
+    return merged;
+  }
+  function saveArray(key, arr){
+    const unique = [];
+    arr.forEach(id => { if (unique.indexOf(id) === -1) unique.push(id); });
+    storageWriteAll(key, JSON.stringify(unique));
+    return unique;
+  }
+  function getUnlocked(){ return loadArray("mq_unlocked"); }
+  function setUnlocked(arr){ return saveArray("mq_unlocked", arr); }
+  function getLevelsDone(){ return loadArray("mq_levels"); }
+  function setLevelsDone(arr){ return saveArray("mq_levels", arr); }
+  function getGradesDone(){ return loadArray("mq_grades"); }
+  function setGradesDone(arr){ return saveArray("mq_grades", arr); }
+  function loadTheme(){
+    const vals = storageReadAll("mq_theme");
+    return vals.length ? vals[vals.length - 1] : null;
+  }
+  function saveTheme(t){ storageWriteAll("mq_theme", t); }
+
+  /* ---------- звуки ---------- */
+  const SoundFX = (function(){
+    let ctx = null;
+    let enabled = true;
+    function getCtx(){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      if (!ctx){ try{ ctx = new AC(); }catch(e){ return null; } }
+      if (ctx && ctx.state === "suspended"){ try{ ctx.resume(); }catch(e){} }
+      return ctx;
+    }
+    function note(freq, opts){
+      if (!enabled) return;
+      const c = getCtx();
+      if (!c) return;
+      const o = opts || {};
+      const type  = o.type  || "sine";
+      const dur   = o.dur   || 0.12;
+      const vol   = o.vol   || 0.045;
+      const delay = o.delay || 0;
+      const t0 = c.currentTime + delay;
+      const osc = c.createOscillator();
+      const g = c.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, t0);
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(Math.max(vol, 0.0002), t0 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      osc.connect(g);
+      g.connect(c.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.05);
+    }
+    return {
+      setEnabled(v){ enabled = v; },
+      isEnabled(){ return enabled; },
+      warmUp(){ if (enabled) getCtx(); },
+      hoverBtn(){
+        note(523.25, { type: "sine", dur: 0.14, vol: 0.045 });
+        note(783.99, { type: "sine", dur: 0.16, vol: 0.028, delay: 0.045 });
+      },
+      hoverSecondary(){ note(440, { type: "sine", dur: 0.12, vol: 0.032 }); },
+      hoverCard(){
+        note(880, { type: "sine", dur: 0.18, vol: 0.034 });
+        note(1318.5, { type: "sine", dur: 0.2, vol: 0.018, delay: 0.05 });
+      },
+      hoverAnswer(){ note(587.33, { type: "triangle", dur: 0.11, vol: 0.038 }); },
+      click(){ note(330, { type: "sine", dur: 0.07, vol: 0.026 }); },
+      toggleOn(){
+        note(523.25, { type: "sine", dur: 0.12, vol: 0.05 });
+        note(659.25, { type: "sine", dur: 0.14, vol: 0.05, delay: 0.08 });
+        note(783.99, { type: "sine", dur: 0.18, vol: 0.05, delay: 0.16 });
+      }
+    };
+  })();
+
+  const soundToggleBtn = document.getElementById("soundToggleBtn");
+  (function initSound(){
+    const vals = storageReadAll("mq_sound");
+    const saved = vals.length ? vals[vals.length - 1] : null;
+    if (saved === "off") SoundFX.setEnabled(false);
+    updateSoundToggleUI();
+  })();
+  function updateSoundToggleUI(){
+    soundToggleBtn.textContent = SoundFX.isEnabled() ? "🔊" : "🔇";
+    soundToggleBtn.title = SoundFX.isEnabled() ? "Выключить звук" : "Включить звук";
+  }
+  soundToggleBtn.addEventListener("click", () => {
+    const on = !SoundFX.isEnabled();
+    SoundFX.setEnabled(on);
+    storageWriteAll("mq_sound", on ? "on" : "off");
+    updateSoundToggleUI();
+    if (on) SoundFX.toggleOn();
+  });
+  document.addEventListener("pointerdown", () => { SoundFX.warmUp(); });
+
+  const SOUND_SELECTOR = ".btn, .pick-card, .answer, .grade-card";
+  let lastHoverEl = null;
+  document.addEventListener("mouseover", function(e){
+    const el = (e.target && e.target.closest) ? e.target.closest(SOUND_SELECTOR) : null;
+    if (el && !el.disabled && el !== lastHoverEl){
+      lastHoverEl = el;
+      if (el.classList.contains("answer")) SoundFX.hoverAnswer();
+      else if (el.classList.contains("grade-card")) SoundFX.hoverCard();
+      else if (el.classList.contains("pick-card")) SoundFX.hoverCard();
+      else if (el.classList.contains("secondary")) SoundFX.hoverSecondary();
+      else SoundFX.hoverBtn();
+    }
+  });
+  document.addEventListener("mouseout", function(e){
+    if (!lastHoverEl) return;
+    const rel = e.relatedTarget;
+    const stillInside = (rel && rel.closest) ? rel.closest(SOUND_SELECTOR) === lastHoverEl : false;
+    if (!stillInside) lastHoverEl = null;
+  });
+  document.addEventListener("click", function(e){
+    const el = (e.target && e.target.closest) ? e.target.closest(SOUND_SELECTOR) : null;
+    if (el && !el.disabled) SoundFX.click();
+  });
+
+  /* ---------- элементы ---------- */
+  const startScreen  = document.getElementById("startScreen");
+  const themeScreen  = document.getElementById("themeScreen");
+  const gradeScreen  = document.getElementById("gradeScreen");
+  const levelScreen  = document.getElementById("levelScreen");
+  const achScreen    = document.getElementById("achScreen");
+  const quizScreen   = document.getElementById("quizScreen");
+  const resultScreen = document.getElementById("resultScreen");
+  const ALL_SCREENS  = [startScreen, themeScreen, gradeScreen, levelScreen, achScreen, quizScreen, resultScreen];
+
+  const toThemeBtn = document.getElementById("toThemeBtn");
+  const achBtn = document.getElementById("achBtn");
+  const achBackBtn = document.getElementById("achBackBtn");
+  const themeBackBtn = document.getElementById("themeBackBtn");
+  const gradeBackBtn = document.getElementById("gradeBackBtn");
+  const backFromLevelBtn = document.getElementById("backFromLevelBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const restartBtn = document.getElementById("restartBtn");
+  const changeLevelBtn = document.getElementById("changeLevelBtn");
+  const gradeGrid = document.getElementById("gradeGrid");
+  const gradeBadge = document.getElementById("gradeBadge");
+  const levelSubtitle = document.getElementById("levelSubtitle");
+  const qCounter = document.getElementById("qCounter");
+  const scoreBadge = document.getElementById("scoreBadge");
+  const streakBadge = document.getElementById("streakBadge");
+  const diffBadge = document.getElementById("diffBadge");
+  const progressFill = document.getElementById("progressFill");
+  const qSlide = document.getElementById("qSlide");
+  const qText = document.getElementById("qText");
+  const answersBox = document.getElementById("answersBox");
+  const feedback = document.getElementById("feedback");
+  const fbTitle = document.getElementById("fbTitle");
+  const fbText = document.getElementById("fbText");
+  const nextRow = document.getElementById("nextRow");
+
+  let gradeKey = 3;
+  let levelKey = "easy";
+  let activeQuestions = [];
+  let current = 0;
+  let score = 0;
+  let streak = 0;
+  let bestStreak = 0;
+  let answered = false;
+  let userPicks = [];
+
+  /* ---------- тема ---------- */
+  if (loadTheme() === "dark") document.body.classList.add("dark");
+  document.querySelectorAll(".pick-card[data-theme]").forEach(card => {
+    card.addEventListener("click", () => {
+      document.body.classList.toggle("dark", card.dataset.theme === "dark");
+      saveTheme(card.dataset.theme);
+      showScreen(gradeScreen);
+    });
+  });
+
+  /* ---------- НОВОЕ: классы ---------- */
+  for (let g = 1; g <= 11; g++){
+    const b = document.createElement("button");
+    b.className = "grade-card" + (g === gradeKey ? " selected" : "");
+    b.dataset.grade = String(g);
+    b.innerHTML = '<span class="g-num">' + g + '</span><span class="g-label">класс</span>';
+    b.addEventListener("click", () => {
+      gradeKey = g;
+      document.querySelectorAll(".grade-card").forEach(c => c.classList.remove("selected"));
+      b.classList.add("selected");
+      gradeBadge.textContent = "🏫 " + gradeKey + " класс";
+      levelSubtitle.textContent = "Вопросы для " + gradeKey + " класса. Выбери сложность!";
+      showScreen(levelScreen);
+    });
+    gradeGrid.appendChild(b);
+  }
+  gradeBackBtn.addEventListener("click", () => showScreen(themeScreen));
+
+  /* ---------- переходы ---------- */
+  function showScreen(el){
+    ALL_SCREENS.forEach(s => s.style.display = "none");
+    el.style.display = "block";
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.animation = "fadeUp .5s ease both";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  toThemeBtn.addEventListener("click", () => showScreen(themeScreen));
+  themeBackBtn.addEventListener("click", () => showScreen(startScreen));
+  backFromLevelBtn.addEventListener("click", () => showScreen(gradeScreen));
+  achBtn.addEventListener("click", () => { renderAchScreen(); showScreen(achScreen); });
+  achBackBtn.addEventListener("click", () => showScreen(startScreen));
+  changeLevelBtn.addEventListener("click", () => showScreen(levelScreen));
+
+  /* ---------- сложность ---------- */
+  document.querySelectorAll(".pick-card[data-level]").forEach(card => {
+    card.addEventListener("click", () => {
+      levelKey = card.dataset.level;
+      const lv = LEVELS[levelKey];
+      diffBadge.textContent = lv.emoji + " " + lv.name;
+      diffBadge.className = "diff-badge " + levelKey;
+      gradeBadge.textContent = "🏫 " + gradeKey + " класс";
+      startQuiz();
+    });
+  });
+
+  function startQuiz(){
+    let base;
+    if (gradeKey === 3){
+      base = QUESTIONS_BY_LEVEL[levelKey];
+    } else {
+      base = buildGeneratedQuiz(gradeKey, levelKey);
+    }
+    activeQuestions = shuffle(base.map(q => ({ q: q.q, a: shuffle(q.a) })));
+    current = 0; score = 0; streak = 0; bestStreak = 0; userPicks = [];
+    scoreBadge.textContent = "⭐ Баллы: 0";
+    streakBadge.classList.remove("on");
+    showScreen(quizScreen);
+    renderQuestion();
+  }
+
+  restartBtn.addEventListener("click", startQuiz);
+  nextBtn.addEventListener("click", () => {
+    current++;
+    if (current < activeQuestions.length) renderQuestion();
+    else showResults();
+  });
+
+  /* ---------- вопросы ---------- */
+  function renderQuestion() {
+    answered = false;
+    const item = activeQuestions[current];
+    const total = activeQuestions.length;
+    qCounter.textContent = "Вопрос " + (current + 1) + " из " + total;
+    progressFill.style.width = (current / total * 100) + "%";
+    qSlide.classList.remove("q-slide");
+    void qSlide.offsetWidth;
+    qSlide.classList.add("q-slide");
+    qText.textContent = item.q;
+    answersBox.innerHTML = "";
+    item.a.forEach((ans, i) => {
+      const btn = document.createElement("button");
+      btn.className = "answer";
+      btn.innerHTML = '<span class="letter">' + LETTERS[i] + '</span><span>' + ans.t + '</span>';
+      btn.addEventListener("click", () => selectAnswer(i, btn));
+      answersBox.appendChild(btn);
+    });
+    feedback.className = "feedback";
+    nextRow.classList.remove("show");
+    nextBtn.textContent = (current === total - 1) ? "Показать результат 🏁" : "Следующий вопрос →";
+  }
+
+  function selectAnswer(i, btn) {
+    if (answered) return;
+    answered = true;
+    const item = activeQuestions[current];
+    const buttons = answersBox.querySelectorAll(".answer");
+    buttons.forEach(b => b.disabled = true);
+    const chosen = item.a[i];
+    userPicks[current] = i;
+    if (chosen.ok) {
+      score++;
+      streak++;
+      if (streak > bestStreak) bestStreak = streak;
+      scoreBadge.textContent = "⭐ Баллы: " + score;
+      if (streak >= 2){
+        streakBadge.textContent = "🔥 Серия: " + streak;
+        streakBadge.classList.add("on");
+      }
+      btn.classList.add("correct");
+      fbTitle.textContent = "✅ Правильно!";
+      feedback.classList.add("good");
+      fbText.textContent = chosen.e;
+    } else {
+      streak = 0;
+      streakBadge.classList.remove("on");
+      btn.classList.add("wrong");
+      const correctIdx = item.a.findIndex(a => a.ok);
+      buttons[correctIdx].classList.add("correct");
+      fbTitle.textContent = "❌ Неправильно!";
+      feedback.classList.add("bad");
+      fbText.innerHTML = "<b>Почему этот ответ не подходит:</b> " + chosen.e +
+                         "<br><b>Правильный ответ:</b> " + item.a[correctIdx].t + ". " + item.a[correctIdx].e;
+    }
+    feedback.classList.add("show");
+    nextRow.classList.add("show");
+    progressFill.style.width = ((current + 1) / activeQuestions.length * 100) + "%";
+  }
+
+  /* ---------- достижения ---------- */
+  function buildAchItem(a, unlockedSet, newSet){
+    const unlocked = unlockedSet.has(a.id);
+    const div = document.createElement("div");
+    div.className = "ach-item" + (unlocked ? "" : " locked") + ((newSet && newSet.has(a.id)) ? " new" : "");
+    div.innerHTML =
+      '<span class="a-emoji">' + a.emoji + '</span>' +
+      '<span class="a-name">' + a.name + '</span>' +
+      '<span class="a-desc">' + a.desc + '</span>';
+    return div;
+  }
+  function renderAchScreen(){
+    const unlocked = getUnlocked();
+    const unlockedSet = new Set(unlocked);
+    const grid = document.getElementById("achScreenGrid");
+    grid.innerHTML = "";
+    ACHIEVEMENTS.forEach(a => grid.appendChild(buildAchItem(a, unlockedSet, null)));
+    document.getElementById("achScreenCount").textContent =
+      "Открыто " + unlocked.length + " из " + ACHIEVEMENTS.length;
+  }
+
+  /* ---------- результаты ---------- */
+  function showResults() {
+    const total = activeQuestions.length;
+    const lv = LEVELS[levelKey];
+    const pct = Math.round(score / total * 100);
+    document.getElementById("resultSubtitle").textContent =
+      gradeKey + " класс · уровень «" + lv.name + "» " + lv.emoji + " пройден!";
+    document.getElementById("resultScore").textContent = score + "/" + total;
+    document.getElementById("resultPercent").textContent = pct + "%";
+
+    let msg = "";
+    if (score >= 9)      msg = "🏆 Отлично! Ты настоящий знаток математики!";
+    else if (score >= 7) msg = "👍 Молодец! Очень хороший результат — ещё чуть-чуть, и будет идеально!";
+    else if (score >= 5) msg = "🙂 Неплохо! Повтори темы, в которых ошибся, и попробуй ещё раз.";
+    else                 msg = "💪 Не расстраивайся! Прочитай объяснения ниже и обязательно попробуй снова — у тебя получится!";
+    document.getElementById("resultMsg").textContent = msg;
+
+    document.getElementById("resultLevel").innerHTML =
+      '<span class="score-badge">🏫 ' + gradeKey + ' класс</span>' +
+      '<span class="diff-badge ' + levelKey + '">' + lv.emoji + ' ' + lv.name + '</span>';
+
+    let levelsDone = getLevelsDone();
+    if (levelsDone.indexOf(levelKey) === -1) levelsDone.push(levelKey);
+    levelsDone = setLevelsDone(levelsDone);
+
+    let gradesDone = getGradesDone();
+    if (gradesDone.indexOf(String(gradeKey)) === -1) gradesDone.push(String(gradeKey));
+    gradesDone = setGradesDone(gradesDone);
+
+    const stats = {
+      score: score,
+      total: total,
+      levelKey: levelKey,
+      bestStreak: bestStreak,
+      levelsDone: new Set(levelsDone),
+      gradesDone: new Set(gradesDone)
+    };
+
+    const unlocked = getUnlocked();
+    const newIds = [];
+    ACHIEVEMENTS.forEach(a => {
+      if (unlocked.indexOf(a.id) === -1 && a.check(stats)) newIds.push(a.id);
+    });
+    const allUnlocked = setUnlocked(unlocked.concat(newIds));
+
+    const unlockedSet = new Set(allUnlocked);
+    const newSet = new Set(newIds);
+    const grid = document.getElementById("achResultGrid");
+    grid.innerHTML = "";
+    ACHIEVEMENTS.forEach(a => grid.appendChild(buildAchItem(a, unlockedSet, newSet)));
+    document.getElementById("achResultTitle").textContent =
+      newIds.length > 0
+        ? "🏅 Достижения · новых: " + newIds.length + "! (всего " + allUnlocked.length + " из " + ACHIEVEMENTS.length + ")"
+        : "🏅 Достижения · открыто " + allUnlocked.length + " из " + ACHIEVEMENTS.length;
+
+    const list = document.getElementById("reviewList");
+    list.innerHTML = "";
+    activeQuestions.forEach((item, qi) => {
+      const correctIdx = item.a.findIndex(a => a.ok);
+      const pick = userPicks[qi];
+      const isOk = pick === correctIdx;
+      const div = document.createElement("div");
+      div.className = "review-item";
+      div.innerHTML =
+        '<div class="rq">' + (qi + 1) + '. ' + item.q + '</div>' +
+        '<span class="tag ' + (isOk ? 'ok' : 'bad') + '">' + (isOk ? '✔ верно' : '✘ ошибка') + '</span>' +
+        'Твой ответ: <b>' + (pick !== undefined ? item.a[pick].t : "—") + '</b>' +
+        (isOk ? '' : ' · Правильный ответ: <b>' + item.a[correctIdx].t + '</b>') +
+        '<div class="explain">💡 ' + (isOk ? item.a[correctIdx].e : item.a[pick].e) + '</div>';
+      list.appendChild(div);
+    });
+
+    showScreen(resultScreen);
+  }
+</script>
+</body>
+</html>
